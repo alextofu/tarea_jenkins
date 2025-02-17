@@ -4,7 +4,10 @@ pipeline {
         stage('Install Vercel') {
             steps {
                 script {
-                    sh 'sudo npm install -g vercel'
+                    // Set a local npm global directory that Jenkins user has permissions to
+                    sh 'mkdir -p ~/.npm-global'
+                    sh 'npm config set prefix ~/.npm-global'
+                    sh 'npm install -g vercel'
                 }
             }
         }
