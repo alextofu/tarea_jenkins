@@ -1,14 +1,11 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:16' }
+    }
     stages {
         stage('Install Vercel') {
             steps {
-                script {
-                    // Set a local npm global directory that Jenkins user has permissions to
-                    sh 'mkdir -p ~/.npm-global'
-                    sh 'npm config set prefix ~/.npm-global'
-                    sh 'npm install -g vercel'
-                }
+                sh 'npm install -g vercel'
             }
         }
         stage('Build') {
