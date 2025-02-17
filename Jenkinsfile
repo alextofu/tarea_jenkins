@@ -1,6 +1,13 @@
 pipeline {
     agent any
     stages {
+        stage('Install Vercel') {
+            steps {
+                script {
+                    sh 'npm install -g vercel'
+                }
+            }
+        }
         stage('Build') {
             steps {
                 sh 'npm install'
@@ -8,8 +15,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                  withCredentials([string(credentialsId: 'vercel-token', variable: 'VERCEL_TOKEN')]) {
-                    sh 'vercel --token $VERCEL_TOKEN --prod --yes'
+                withCredentials([string(credentialsId: 'vercel-token', variable: 'VERCEL_TOKEN')]) {
+                    sh "vercel --token $VERCEL_TOKEN --prod --yes"
                 }
             }
         }
