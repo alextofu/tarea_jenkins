@@ -4,7 +4,7 @@ pipeline {
         stage('Install Vercel') {
             steps {
                 script {
-                    sh 'npm install -g vercel'
+                    sh 'sudo npm install -g vercel'
                 }
             }
         }
